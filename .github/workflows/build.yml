@@ -1,10 +1,5 @@
 name: Build
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened]
+on: [pull_request]
 jobs:
   sonarcloud:
     name: SonarCloud
@@ -16,5 +11,5 @@ jobs:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ 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 }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ 349f7d272f01a66cee6a7d9825235281a69dd5b4 }}
+          GITHUB_TOKEN: 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  # Needed to get PR information, if any
+          SONAR_TOKEN: 349f7d272f01a66cee6a7d9825235281a69dd5b4
