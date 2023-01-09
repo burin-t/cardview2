@@ -19,4 +19,14 @@ class CardViewModelTests: XCTestCase {
         XCTAssertEqual(model.calculate(a1: 0, a2: 1), 2)
     }
     
+    func testCardViewWithA1Equal0Return10() {
+        let model = CardViewModel()
+        XCTAssertEqual(model.calculateV2(a1: 0, a2: 1), 10)
+    }
+    
+    func testCardViewWithA2Equal0Return20() {
+        let model = CardViewModel()
+        XCTAssertEqual(model.calculateV2(a1: 1, a2: 0), 20)
+    }
+    
 }
