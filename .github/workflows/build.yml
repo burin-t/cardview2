@@ -22,7 +22,7 @@ jobs:
           xcodebuild -project cardview2.xcodeproj/ -scheme cardview2 -derivedDataPath Build/ -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0' -enableCodeCoverage YES clean build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
       - name: Create code coverage report
         run: |
-          ../xccov-to-sonarqube-generic.sh ../Build/Logs/Test/*.xcresult/ > ../sonarqube-generic-coverage.xml
+          xccov-to-sonarqube-generic.sh Build/Logs/Test/*.xcresult/ > sonarqube-generic-coverage.xml
         shell: bash
       - name: Import code coverage report
         run: |
