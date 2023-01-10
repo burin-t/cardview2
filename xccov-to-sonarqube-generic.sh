@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# set -e pipefail
+set -euo pipefail
 
 function convert_file {
   local xccovarchive_file="$1"
