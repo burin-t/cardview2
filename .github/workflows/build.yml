@@ -25,7 +25,7 @@ jobs:
           bash xccov-to-sonarqube-generic.sh Build/Logs/Test/*.xcresult/ > sonarqube-generic-coverage.xml 
       - name: Import code coverage report
         run: |
-          sonar-scanner -Dsonar.projectKey=TestCoverage -Dsonar.sources=. -Dsonar.coverageReportPaths=sonarqube-generic-coverage.xml
+          sonar-scanner -Dsonar.projectKey=burin-t_cardview2 -Dsonar.sources=. -Dsonar.coverageReportPaths=sonarqube-generic-coverage.xml
       - name: Run sonar-scanner
         env:
           GITHUB_TOKEN: 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
