@@ -19,12 +19,18 @@ jobs:
         uses: SonarSource/sonarcloud-github-c-cpp@v1
       - name: Run build-wrapper
         run: |
-          build-wrapper-macosx-x86 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} \
-          xcodebuild test -project cardview2.xcodeproj/ -scheme cardview2 -derivedDataPath Build/ -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0' -enableCodeCoverage YES clean build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          xcodebuild -project swift-coverage-example.xcodeproj/ -scheme swift-coverage-example -derivedDataPath Build/ -enableCodeCoverage YES clean build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+      - name: Create code coverage report
+        run: |
+          xccov-to-sonarqube-generic.sh Build/Logs/Test/*.xcresult/ > sonarqube-generic-coverage.xml
+        shell: bash
+      - name: Import code coverage report
+        run: |
+          sonar-scanner -Dsonar.projectKey=TestCoverage -Dsonar.sources=. -Dsonar.coverageReportPaths=sonarqube-generic-coverage.xml
       - name: Run sonar-scanner
         env:
           GITHUB_TOKEN: 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
           SONAR_TOKEN: 349f7d272f01a66cee6a7d9825235281a69dd5b4
-        run: |
+        run: | 
           sonar-scanner --define sonar.cfamily.build-wrapper-output="${{ env.BUILD_WRAPPER_OUT_DIR }}"
           name: SonarCloud
