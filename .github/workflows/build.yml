@@ -22,14 +22,4 @@ jobs:
           xcodebuild -project cardview2.xcodeproj/ -scheme cardview2 -derivedDataPath Build/ -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.0' -enableCodeCoverage YES clean build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
       - name: Create code coverage report
         run: |
-          bash xccov-to-sonarqube-generic.sh Build/Logs/Test/*.xcresult/ > sonarqube-generic-coverage.xml 
-      - name: Import code coverage report
-        run: |
-          sonar-scanner -Dsonar.projectKey=burin-t_cardview2 -Dsonar.sources=. -Dsonar.coverageReportPaths=sonarqube-generic-coverage.xml
-      - name: Run sonar-scanner
-        env:
-          GITHUB_TOKEN: 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
-          SONAR_TOKEN: 349f7d272f01a66cee6a7d9825235281a69dd5b4
-        run: | 
-          sonar-scanner --define sonar.cfamily.build-wrapper-output="${{ env.BUILD_WRAPPER_OUT_DIR }}"
-          name: SonarCloud
+          xcov -p cardview2.xcodeproj -s cardview2 -o xcov_output
