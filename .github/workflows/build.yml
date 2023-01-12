@@ -16,4 +16,4 @@ jobs:
         run: sudo gem install xcov
       - name: Create code coverage report
         run: |
-          xcov -p cardview2.xcodeproj -s cardview2 -o xcov_output
+          xcov -p ../cardview2.xcodeproj -s cardview2 -o xcov_output
